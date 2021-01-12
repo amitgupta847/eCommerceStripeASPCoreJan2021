@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using API.Data;
+using Core.Interfaces;
 using Infrastructure.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -35,6 +35,9 @@ namespace API
       //specify the DB connection
       string connString = Configuration.GetConnectionString("DefaultConnection");
       services.AddDbContext<StoreContext>(x => x.UseSqlite(connString));
+
+      //repositories
+      services.AddScoped<IProductRepository,ProductRepository>();
 
       services.AddSwaggerGen(c =>
             {

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace Infrastructure.Data.Migrations
+namespace Infrastructure.Migrations
 {
     [DbContext(typeof(StoreContext))]
     partial class StoreContextModelSnapshot : ModelSnapshot
@@ -48,6 +48,8 @@ namespace Infrastructure.Data.Migrations
 
                     b.HasIndex("ProductBrandId");
 
+                    b.HasIndex("ProductTypeId");
+
                     b.ToTable("Products");
                 });
 
@@ -89,7 +91,7 @@ namespace Infrastructure.Data.Migrations
 
                     b.HasOne("Core.Entities.ProductType", "ProductType")
                         .WithMany()
-                        .HasForeignKey("ProductBrandId")
+                        .HasForeignKey("ProductTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

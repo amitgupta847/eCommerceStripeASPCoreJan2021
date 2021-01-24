@@ -30,15 +30,15 @@ namespace API
     public void ConfigureServices(IServiceCollection services)
     {
 
-      services.AddControllers();
-
-      //specify the DB connection
+     //specify the DB connection
       string connString = Configuration.GetConnectionString("DefaultConnection");
       services.AddDbContext<StoreContext>(x => x.UseSqlite(connString));
 
       //repositories
       services.AddScoped<IProductRepository,ProductRepository>();
+      services.AddScoped(typeof(IGenericRepository<>),(typeof(GenericRepository<>)));
 
+      services.AddControllers();
       services.AddSwaggerGen(c =>
             {
               c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
